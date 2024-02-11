@@ -55,8 +55,8 @@ int sommeRecursive(Liste liste){
     else{
         return liste -> val + sommeRecursive(liste -> next);
     }
-
 }
+
 void main(){
     Liste liste = NULL;
 
