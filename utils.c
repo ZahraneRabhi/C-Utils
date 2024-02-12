@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct Element{
     int val;
@@ -18,8 +19,9 @@ void remplirListe(int taille, Liste * liste){
 }
 
 void afficheListe(int taille, Liste liste){
+    printf("Liste chainée: ");
     for (int i = 0; i < taille; i++){
-        printf("%d ", liste -> val);
+        printf("|%d|", liste -> val);
         liste = liste -> next;
     }
     printf("\n");
@@ -57,12 +59,28 @@ int sommeRecursive(Liste liste){
     }
 }
 
+int trouveIndice(int val, Liste liste){
+    int existe = false;
+    int indice = 0;
+    
+    while (existe == false && liste != NULL){
+        indice += 1;
+        liste = liste -> next;
+        if (liste -> val == val){
+            existe = true;
+        }
+    }
+    return indice;
+}
+
 void main(){
     Liste liste = NULL;
-
+    
     remplirListe(5, &liste);
     afficheListe(5, liste);
+    int valeur = 3;
+    printf("La valeur %d existe dans l'indice %d", valeur, trouveIndice(valeur, liste));
     //afficheListeRecusrive(liste);
     //printf("%d", somme(5, liste));
-    printf("%d", sommeRecursive(liste));
+    //printf("%d", sommeRecursive(liste));
 }
