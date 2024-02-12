@@ -32,7 +32,7 @@ void afficheListe(int taille, Liste liste){
 void afficheListeRecusrive(Liste liste){
     if(liste != NULL){
         afficheListeRecusrive(liste -> next);
-        printf("%d ", liste -> val);
+        printf("%d", liste -> val);
     }
     printf("\n");
 }
@@ -61,8 +61,8 @@ void main(){
     Liste liste = NULL;
 
     remplirListe(5, &liste);
-    //afficheListe(5, &liste);
-    afficheListeRecusrive(liste);
+    afficheListe(5, liste);
+    //afficheListeRecusrive(liste);
     //printf("%d", somme(5, liste));
     printf("%d", sommeRecursive(liste));
 }
