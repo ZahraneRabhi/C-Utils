@@ -99,15 +99,32 @@ void ajouterTri(int val, Liste* liste) {
     }
 }
 
+// Exercice 3
+void inverserListe(Liste* liste) {
+    Liste precedent = NULL;
+    Liste courant = *liste;
+    Liste next = NULL;
+
+    while (courant != NULL) {
+        next = courant->next; 
+        courant->next = precedent;  
+        precedent = courant;
+        courant = next;
+    }
+
+    *liste = precedent;  
+}
+
+
 int main() {
     Liste liste = NULL;
 
     remplirListe(5, &liste);
     afficheListe(5, liste);
-    ajouterTri(3, &liste);
-    afficheListe(6, liste);
+    inverserListe(&liste);
+    afficheListe(5, liste);
 
-    // Test other functions
+
     int valeur = 3;
     printf("La valeur %d existe dans l'indice %d\n", valeur, trouveIndice(valeur, liste));
     printf("Somme: %d\n", sommeRecursive(liste));
