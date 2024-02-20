@@ -99,7 +99,6 @@ void ajouterTri(int val, Liste* liste) {
     }
 }
 
-// Exercice 3
 void inverserListe(Liste* liste) {
     Liste precedent = NULL;
     Liste courant = *liste;
@@ -115,23 +114,56 @@ void inverserListe(Liste* liste) {
     *liste = precedent;  
 }
 
+void ajouterFin(Liste *l, int x){
+    Element *new = (Element*)malloc(sizeof(Element));
+    new -> val = x;
+    new -> next = NULL;
+    if (*l == NULL){
+        *l = new;
+    }else{
+        Element *p = *l;
+        while(p -> next != NULL){
+            p = p -> next;
+        }
+        p -> next = new;
+    }
+}
+
+Liste fusionner(Liste liste_1, Liste liste_2) {
+  Liste liste_fusion = NULL;
+  while (liste_1 != NULL && liste_2 != NULL) {
+    if (liste_1->val < liste_2->val) {
+      ajouterFin(&liste_fusion, liste_1->val);
+      liste_1 = liste_1->next;
+    } else {
+      ajouterFin(&liste_fusion, liste_2->val);
+      liste_2 = liste_2->next;
+    }
+  }
+
+  while (liste_1 != NULL) {
+    ajouterFin(&liste_fusion, liste_1->val);
+    liste_1 = liste_1->next;
+  }
+
+  while (liste_2 != NULL) {
+    ajouterFin(&liste_fusion, liste_2->val);
+    liste_2 = liste_2->next;
+  }
+
+  return liste_fusion;
+}
 
 int main() {
-    Liste liste = NULL;
+    Liste liste_1 = NULL;
+    Liste liste_2 = NULL;
+    Liste liste_fusion = NULL;
 
-    remplirListe(5, &liste);
-    afficheListe(5, liste);
-    inverserListe(&liste);
-    afficheListe(5, liste);
+    remplirListe(5, &liste_1);
+    remplirListe(5, &liste_2);
 
-
-    int valeur = 3;
-    printf("La valeur %d existe dans l'indice %d\n", valeur, trouveIndice(valeur, liste));
-    printf("Somme: %d\n", sommeRecursive(liste));
-
-    printf("Liste en ordre décroissant: ");
-    afficheListeRecusrive(liste);
-    printf("\n");
+    liste_fusion = fusionner(liste_1, liste_2);
+    afficheListe(5, liste_fusion);
 
     return 0;
 }
